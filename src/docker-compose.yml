@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    image: nginx
+    ports:
+      - 443:443
+    volumes:
+      - wp:/var/www/html
+    depends_on:
+      - wordpress
+    networks:
+      - net
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    image: wordpress
+    hostname: wordpress.inception_net
+    volumes:
+      - wp:/var/www/html
+    env_file:
+      - ./.env
+    depends_on:
+      - mariadb
+    networks:
+      - net
+    restart: always
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    image: mariadb
+    volumes:
+      - mdb:/var/lib/mysql
+    env_file:
+      - ./.env
+    networks:
+        - net
+    restart: always
+
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/fmanzana/data/wp
+      o: bind
+
+  mdb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/fmanzana/data/mdb
+      o: bind
+    
+networks:
+  net:
