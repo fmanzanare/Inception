@@ -9,10 +9,7 @@ re:
 	docker-compose -f ./src/docker-compose.yml up -d --build --force-recreate
 
 clean:
-	docker stop $$(docker ps -qa)
-	docker rm $$(docker ps -qa)
-	docker rmi -f $$(docker images -qa)
-	docker volume rm $$(docker volume ls -q)
-	docker network rm $$(docker network ls -q)
+	sudo rm -rf /home/fmanzana/data/wp/*
+	sudo rm -rf /home/fmanzana/data/mdb/*
 
 .PHONY: all down re clean

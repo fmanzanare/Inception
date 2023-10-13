@@ -9,7 +9,7 @@ RUN		openssl req -newkey rsa:4096 -x509 -sha256 -days 365 \
 			-keyout /etc/nginx/ssl/fmanzana.key \
 			-subj "/C=ES/ST=Andalusia/L=Malaga/O=42 School/OU=fmanzana/CN=fmanzana.42.fr"
 
-COPY	./conf/nginx.conf /etc/nginx/conf.d
+COPY	./conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE	443
 

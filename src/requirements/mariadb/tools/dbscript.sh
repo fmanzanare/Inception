@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mv /my.conf /etc/mysql/my.conf
+mv /my.cnf /etc/mysql/my.cnf
 
 mysql_install_db
 /etc/init.d/mysql start
@@ -16,14 +16,14 @@ y
 y
 EOF
 
-echo	"GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
+echo "GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 FLUSH PRIVILEGES;
-CREATE DATABASE IF NOT EXISTS $MYSQL_DB;
-CREATE USER '$MYSQL_USER'@'wordpress.inception_net' IDENTIFIED BY '$MYSQL_PASSWORD';
-GRANT ALL ON *.* TO '$MYSQL_USER'@'wordpress.inception_net';
+CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;
+CREATE USER '$MYSQL_USER'@'wordpress.src_net' IDENTIFIED BY '$MYSQL_PASSWORD';
+GRANT ALL ON *.* TO '$MYSQL_USER'@'wordpress.src_net';
 FLUSH PRIVILEGES;" | mysql -u root
 
-sleep 3
+sleep 5
 /etc/init.d/mysql stop
-sleep 3
+sleep 5
 

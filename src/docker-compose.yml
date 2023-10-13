@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   nginx:
@@ -18,8 +18,8 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
-    image: wordpress
     hostname: wordpress.inception_net
+    image: wordpress
     volumes:
       - wp:/var/www/html
     env_file:
@@ -33,6 +33,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
+    hostname: mariadb.inception_net
     image: mariadb
     volumes:
       - mdb:/var/lib/mysql
