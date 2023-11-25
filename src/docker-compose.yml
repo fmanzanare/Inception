@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   nginx:
@@ -11,7 +11,7 @@ services:
     depends_on:
       - wordpress
     networks:
-      - net
+      - inception_net
     restart: always
 
   wordpress:
@@ -25,7 +25,7 @@ services:
     depends_on:
       - mariadb
     networks:
-      - net
+      - inception_net
     restart: always
 
   mariadb:
@@ -37,7 +37,7 @@ services:
     env_file:
       - ./.env
     networks:
-        - net
+        - inception_net
     restart: always
 
 volumes:
@@ -56,4 +56,5 @@ volumes:
       o: bind
     
 networks:
-  net:
+  inception_net:
+    driver: bridge
