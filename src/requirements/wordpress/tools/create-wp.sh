@@ -14,10 +14,6 @@ else
 	
 	wp core download --path=/var/www/html --allow-root
 
-	# wp config create --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER \
-	# 	--dbpass=$MYSQL_PASSWORD --dbhost=mariadb --path=/var/www/html \
-	# 	--skip-check --allow-root
-	
 	mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 	sed -i "s/password_here/$MYSQL_PASSWORD/g" /var/www/html/wp-config.php
 	sed -i "s/localhost/mariadb.src_net/g" /var/www/html/wp-config.php
@@ -33,7 +29,7 @@ else
 
 	wp user create $MYSQL_USER $WP_USER_EMAIL \
 		--user_pass=$MYSQL_PASSWORD \
-		--role=author --allow_root \
+		--role=author --allow-root \
 		--path=/var/www/html
 fi
 
